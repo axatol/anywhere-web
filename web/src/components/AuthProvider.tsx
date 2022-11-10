@@ -1,5 +1,10 @@
-import { Auth0Provider } from "@auth0/auth0-react";
-import { PropsWithChildren } from "react";
+import {
+  Auth0Provider,
+  withAuthenticationRequired,
+  WithAuthenticationRequiredOptions,
+} from "@auth0/auth0-react";
+import { Typography } from "antd";
+import { ComponentType, PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
 import { config } from "~/config";
 
@@ -12,11 +17,18 @@ export const AuthProvider = (props: PropsWithChildren<{}>) => {
       domain={config.auth.domain}
       audience={config.auth.audience}
       redirectUri={config.auth.redirectURI}
-      onRedirectCallback={(state) =>
-        navigate(state?.returnTo ?? window.location.pathname)
-      }
+      onRedirectCallback={(state) => navigate(state?.returnTo ?? "/app")}
     >
+      <Typography>AuthProvider</Typography>
       {props.children}
     </Auth0Provider>
   );
+};
+
+export const ProtectedRoute = (
+  props: { component: ComponentType } & WithAuthenticationRequiredOptions
+) => {
+  const { component, ...args } = props;
+  const Component = withAuthenticationRequired(component, args);
+  return <Component />;
 };

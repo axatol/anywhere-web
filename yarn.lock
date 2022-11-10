@@ -2559,6 +2559,11 @@ constructs@^10.0.29:
   resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.1.154.tgz#9ac3ee1305c4cecc7bced3d4097fa9886f3ccc65"
   integrity sha512-JStQT84+NhsfamESRExZoGzpq/f/gpq9xpzgtQNOzungs42Gy8kxjfU378MnVoRqwCHwk0vLN37HZjgH5tJo2A==
 
+constructs@^10.1.155:
+  version "10.1.155"
+  resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.1.155.tgz#dcef1545f3fd6ec379702ee0d52aa27c9cffccaa"
+  integrity sha512-AM8HdZ1GQbOLBmnIU5ybyerNeNn9iEZSZZra+2BWuAhyaA+zJb9oxwxD3isM2uxZviB5NHGhZI83plmhOuh29A==
+
 content-disposition@0.5.4:
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.4.tgz#8b82b4efac82512a02bb0b1dcec9d2c5e8eb5bfe"
@@ -3792,6 +3797,11 @@ jszip@^2.6.1:
   integrity sha512-JIsRKRVC3gTRo2vM4Wy9WBC3TRcfnIZU8k65Phi3izkvPH975FowRYtKGT6PxevA0XnJ/yO8b0QwV0ydVyQwfw==
   dependencies:
     pako "~1.0.2"
+
+ky@^0.32.2:
+  version "0.32.2"
+  resolved "https://registry.yarnpkg.com/ky/-/ky-0.32.2.tgz#dc62001379977b5dbd98f513d95b52fac8bf2207"
+  integrity sha512-eBJeF6IXNwX5rksdwBrE2rIJrU2d84GoTvdM7OmmTIwUVXEMd72wIwvT+nyhrqtv7AzbSNsWz7yRsHgVhj1uog==
 
 kysely-codegen@^0.6.0:
   version "0.6.2"

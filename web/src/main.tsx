@@ -2,28 +2,35 @@ import "antd/dist/antd.less";
 import "./main.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import {
+  BrowserRouter,
+  createBrowserRouter,
+  Outlet,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
 import { Login } from "~/routes/Login";
-import { RedirectCallback } from "~/routes/RedirectCallback";
-import { Home } from "~/routes/Home";
-import { NotFoundError } from "./components/FullPageError";
-import { AuthProvider } from "./components/AuthProvider";
+import { App } from "~/routes/App";
+import { AuthProvider, ProtectedRoute } from "~/components/AuthProvider";
+import { APIProvider } from "~/components/APIProvider";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <AuthProvider>
-        <Outlet />
+        <APIProvider>
+          <Outlet />
+        </APIProvider>
       </AuthProvider>
     ),
     children: [
+      { path: "/redirect/callback" },
       { path: "/login", element: <Login /> },
-      { path: "/redirect/callback", element: <RedirectCallback /> },
-      { path: "/", element: <Home /> },
+      { path: "/", element: <ProtectedRoute component={App} /> },
     ],
   },
-  { path: "*", element: <NotFoundError /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

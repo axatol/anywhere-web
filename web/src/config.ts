@@ -10,6 +10,12 @@ const assertEnv = (key: string) => {
 };
 
 export const config = {
+  debug: import.meta.env.DEV,
+
+  api: {
+    endpoint: assertEnv("VITE_API_ENDPOINT"),
+  },
+
   auth: {
     clientID: assertEnv("VITE_CLIENT_ID"),
     domain: assertEnv("VITE_DOMAIN"),
