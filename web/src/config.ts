@@ -1,0 +1,21 @@
+import auth0 from "auth0-js";
+
+const assertEnv = (key: string) => {
+  const value = import.meta.env[key];
+  if (!value) {
+    throw new Error(`${key} is not defined`);
+  }
+
+  return value;
+};
+
+export const config = {
+  auth: {
+    clientID: assertEnv("VITE_CLIENT_ID"),
+    domain: assertEnv("VITE_DOMAIN"),
+    responseType: assertEnv("VITE_RESPONSE_TYPE"),
+    audience: assertEnv("VITE_AUDIENCE"),
+    redirectURI: assertEnv("VITE_REDIRECT_URI"),
+    scope: assertEnv("VITE_SCOPE"),
+  },
+};
