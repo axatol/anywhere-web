@@ -3,6 +3,8 @@ import { config } from "~/config";
 
 export type APIInstance = ReturnType<typeof ky.create>;
 
+export type APIResponse<T = any> = { message: string; data: T };
+
 export const createAPI = (token: () => Promise<string>) =>
   ky.create({
     hooks: {
@@ -28,7 +30,10 @@ export const createAPI = (token: () => Promise<string>) =>
     },
   });
 
+const unwrap = async <T>(response: APIResponse<T>) => response.data;
+
 export enum TrackStatus {
+  Ready = "READY",
   Unknown = "UNKNOWN",
   Pending = "PENDING",
   Invalid = "INVALID",
@@ -65,35 +70,65 @@ export type ArtistUpdate = Pick<Artist, "name">;
 
 export type ArtistCreate = Pick<Artist, "name">;
 
-const listTracks = (api: APIInstance) => (): Promise<Track[]> =>
-  api.get(`${config.api.endpoint}/api/tracks`).json();
+const listTracks = (api: APIInstance) => () =>
+  api
+    .get(`${config.api.endpoint}/api/tracks`)
+    .json<APIResponse<Track[]>>()
+    .then(unwrap);
 
 const createTrack = (api: APIInstance) => (input: TrackCreate) =>
-  api.post(`${config.api.endpoint}/api/tracks`, { json: input }).json();
+  api
+    .post(`${config.api.endpoint}/api/tracks`, { json: input })
+    .json<APIResponse<Track>>()
+    .then(unwrap);
 
 const readTrack = (api: APIInstance) => (id: string) =>
-  api.get(`${config.api.endpoint}/api/tracks/${id}`).json();
+  api
+    .get(`${config.api.endpoint}/api/tracks/${id}`)
+    .json<APIResponse<Track[]>>()
+    .then(unwrap);
 
 const updateTrack = (api: APIInstance) => (id: string, input: TrackUpdate) =>
-  api.patch(`${config.api.endpoint}/api/tracks/${id}`, { json: input }).json();
+  api
+    .patch(`${config.api.endpoint}/api/tracks/${id}`, { json: input })
+    .json<APIResponse<Track>>()
+    .then(unwrap);
 
 const deleteTrack = (api: APIInstance) => (id: string) =>
-  api.delete(`${config.api.endpoint}/api/tracks/${id}`).json();
+  api
+    .delete(`${config.api.endpoint}/api/tracks/${id}`)
+    .json<APIResponse<null>>()
+    .then(unwrap);
 
-const listArtists = (api: APIInstance) => (): Promise<Artist[]> =>
-  api.get(`${config.api.endpoint}/api/artists`).json();
+const listArtists = (api: APIInstance) => () =>
+  api
+    .get(`${config.api.endpoint}/api/artists`)
+    .json<APIResponse<Artist[]>>()
+    .then(unwrap);
 
 const createArtist = (api: APIInstance) => (input: ArtistCreate) =>
-  api.post(`${config.api.endpoint}/api/artists`, { json: input }).json();
+  api
+    .post(`${config.api.endpoint}/api/artists`, { json: input })
+    .json<APIResponse<Artist>>()
+    .then(unwrap);
 
 const readArtist = (api: APIInstance) => (id: string) =>
-  api.get(`${config.api.endpoint}/api/artists/${id}`).json();
+  api
+    .get(`${config.api.endpoint}/api/artists/${id}`)
+    .json<APIResponse<Artist>>()
+    .then(unwrap);
 
 const updateArtist = (api: APIInstance) => (id: string, input: ArtistUpdate) =>
-  api.patch(`${config.api.endpoint}/api/artists/${id}`, { json: input }).json();
+  api
+    .patch(`${config.api.endpoint}/api/artists/${id}`, { json: input })
+    .json<APIResponse<Artist>>()
+    .then(unwrap);
 
 const deleteArtist = (api: APIInstance) => (id: string) =>
-  api.delete(`${config.api.endpoint}/api/artists/${id}`).json();
+  api
+    .delete(`${config.api.endpoint}/api/artists/${id}`)
+    .json<APIResponse<null>>()
+    .then(unwrap);
 
 export type APIEndpoints = ReturnType<typeof createEndpoints>;
 export const createEndpoints = (api: APIInstance) => ({
