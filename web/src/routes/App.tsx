@@ -1,18 +1,39 @@
+import { RocketOutlined } from "@ant-design/icons";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
-import { Typography } from "antd";
-import { useEffect, useState } from "react";
-import { useAPI } from "~/components/APIProvider";
-import { Artist, Track } from "~/utils/api";
+import { Avatar, Layout } from "antd";
+import { Outlet } from "react-router-dom";
 
-export const App = withAuthenticationRequired(() => {
-  const api = useAPI();
-  const [artists, setArtists] = useState<Artist[] | null>(null);
-  const [tracks, setTracks] = useState<Track[] | null>(null);
+import { NavigationMenu } from "~/components/NavigationMenu";
+import { NotificationDropdown } from "~/components/NotificationDropdown";
+import { ProfileDropdown } from "~/components/track/ProfileDropdown";
+import { config } from "~/config";
 
-  useEffect(() => {
-    api.artists.list().then(setArtists);
-    api.tracks.list().then(setTracks);
-  }, []);
+export const App = withAuthenticationRequired(() => (
+  <Layout style={{ width: "100%", zIndex: config.zIndex.header }}>
+    <Layout.Header
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: config.zIndex.header,
+        padding: "0 16px",
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <Avatar icon={<RocketOutlined />} />
 
-  return <Typography>App</Typography>;
-});
+      <NavigationMenu style={{ height: "64px", flexGrow: 1 }} />
+
+      {/* TODO sync status/history? */}
+      {/* TODO trigger sync? */}
+
+      <NotificationDropdown />
+
+      <ProfileDropdown />
+    </Layout.Header>
+
+    <Layout.Content style={{ margin: "24px", backgroundColor: "white" }}>
+      <Outlet />
+    </Layout.Content>
+  </Layout>
+));
