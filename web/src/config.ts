@@ -1,5 +1,3 @@
-import auth0 from "auth0-js";
-
 const assertEnv = (key: string) => {
   const value = import.meta.env[key];
   if (!value) {
@@ -23,5 +21,10 @@ export const config = {
     audience: assertEnv("VITE_AUDIENCE"),
     redirectURI: assertEnv("VITE_REDIRECT_URI"),
     scope: assertEnv("VITE_SCOPE"),
+  },
+
+  zIndex: {
+    neutral: 0,
+    header: 20,
   },
 };
