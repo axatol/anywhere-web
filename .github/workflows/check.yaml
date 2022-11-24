@@ -12,6 +12,8 @@ jobs:
         with:
           node-version: v16
 
+      - run: npm install -g yarn
+
       - run: yarn install
 
       - run: yarn lint
