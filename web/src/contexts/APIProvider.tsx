@@ -1,11 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { createContext, PropsWithChildren, useContext, useMemo } from "react";
-import {
-  APIEndpoints,
-  APIInstance,
-  createAPI,
-  createEndpoints,
-} from "~/utils/api";
+
+import { APIEndpoints, APIInstance, createAPI, createEndpoints } from "~/api";
 
 const context = createContext<
   ({ instance: APIInstance } & APIEndpoints) | undefined

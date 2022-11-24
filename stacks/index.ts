@@ -1,5 +1,6 @@
-import { WebStack } from "./WebStack";
 import { App } from "@serverless-stack/resources";
+
+import { WebStack } from "./WebStack";
 
 export default function (app: App) {
   app.setDefaultFunctionProps({

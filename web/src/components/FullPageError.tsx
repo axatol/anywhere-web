@@ -1,6 +1,7 @@
-import { Button, Space } from "antd";
+import { Button, Space, Typography } from "antd";
 import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { Center } from "~/components/Center";
 
 export const FullPageError = (props: {
@@ -9,12 +10,16 @@ export const FullPageError = (props: {
   children?: ReactNode;
 }) => (
   <Center>
-    <Space direction="vertical">
-      {props.title}
-      {props.message}
+    <Space direction="vertical" align="center">
+      <Typography.Title level={4}>{props.title}</Typography.Title>
+      <Typography.Text>{props.message}</Typography.Text>
       {props.children}
     </Space>
   </Center>
+);
+
+export const GenericError = () => (
+  <FullPageError title="Uh oh" message="Something went wrong 🤷‍♂️" />
 );
 
 export const NotFoundError = () => {
@@ -22,7 +27,7 @@ export const NotFoundError = () => {
 
   return (
     <FullPageError title="Uh oh" message="Are you lost?">
-      <Button onClick={() => navigate({ pathname: "/home" })}> Go home</Button>
+      <Button onClick={() => navigate({ pathname: "/" })}>Go home</Button>
     </FullPageError>
   );
 };

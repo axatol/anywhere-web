@@ -5,6 +5,7 @@ import {
 } from "@auth0/auth0-react";
 import { ComponentType, PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { config } from "~/config";
 
 export const AuthProvider = (props: PropsWithChildren<{}>) => {
@@ -24,7 +25,7 @@ export const AuthProvider = (props: PropsWithChildren<{}>) => {
 };
 
 export const ProtectedRoute = (
-  props: { component: ComponentType } & WithAuthenticationRequiredOptions
+  props: { component: ComponentType } & WithAuthenticationRequiredOptions,
 ) => {
   const { component, ...args } = props;
   const Component = withAuthenticationRequired(component, args);
