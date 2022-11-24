@@ -10,14 +10,24 @@
     "remove": "sst remove",
     "console": "sst console",
     "typecheck": "tsc --noEmit",
-    "test": "sst bind -- vitest run"
+    "test": "sst bind -- vitest run",
+    "lint": "eslint \"{web,stacks}/**/**.{ts,tsx}\""
   },
   "devDependencies": {
     "@serverless-stack/cli": "^1.17.1",
     "@serverless-stack/resources": "^1.17.1",
     "@tsconfig/node16": "^1.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
     "aws-cdk-lib": "2.50.0",
     "constructs": "^10.1.155",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "prettier": "^2.7.1",
     "typescript": "^4.8.4",
     "vitest": "^0.25.1"
   },
